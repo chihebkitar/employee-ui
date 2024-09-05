@@ -1,0 +1,64 @@
+<!-- src/app/employee.component.html -->
+<div class="container mt-3">
+    <button (click)="showEmployeeForm()" class="btn btn-primary mb-2">Add Employee</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.firstname }}</td>
+          <td>{{ employee.lastname }}</td>
+          <td>{{ employee.email }}</td>
+          <td>
+            <button (click)="showEmployeeForm(employee)" class="btn btn-warning me-2">Edit</button>
+            <button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Employee Form Modal -->
+<div class="modal" tabindex="-1" role="dialog" style="display: block;" *ngIf="isModalVisible">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editing ? 'Edit' : 'Add' }} Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" class="form-control" [(ngModel)]="employeeForm.firstname" name="firstname" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" class="form-control" [(ngModel)]="employeeForm.lastname" name="lastname" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control" [(ngModel)]="employeeForm.email" name="email" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveEmployee()">{{ editing ? 'Update' : 'Save' }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  
